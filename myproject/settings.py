@@ -15,6 +15,7 @@ from decouple import config
 import cloudinary
 import cloudinary.api
 from django import conf
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,16 +88,21 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config("DB_NAME"),
-        'USER': config("DB_USER"),
-        'PASSWORD': config('DB_PASS'),
-        'HOST': config("DB_HOST"),
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config("DB_NAME"),
+#         'USER': config("DB_USER"),
+#         'PASSWORD': config('DB_PASS'),
+#         'HOST': config("DB_HOST"),
       
-    }
+#     }
+# }
+
+DATABASES = {
+    'default': dj_database_url.parse(config('DB_URL'))
 }
+
 
 #Cloudinary configs
 
